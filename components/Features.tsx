@@ -54,23 +54,23 @@ function IllustrationEstimate() {
 function IllustrationJobBoard() {
   return (
     <svg viewBox="0 0 180 120" fill="none" className="w-full h-auto">
-      <rect x="8" y="10" width="74" height="44" rx="7" fill="#00594F" opacity="0.05" stroke="#00594F" strokeWidth="1" opacity="0.15" />
+      <rect x="8" y="10" width="74" height="44" rx="7" fill="#00594F" fillOpacity="0.05" stroke="#00594F" strokeWidth="1" opacity="0.15" />
       <rect x="18" y="20" width="28" height="5" rx="2.5" fill="#00594F" opacity="0.25" />
       <rect x="18" y="30" width="52" height="3.5" rx="1.75" fill="#00594F" opacity="0.1" />
       <rect x="18" y="38" width="36" height="3.5" rx="1.75" fill="#00594F" opacity="0.1" />
       <circle cx="72" cy="20" r="5" fill="#CEDC00" opacity="0.4" />
-      <rect x="98" y="10" width="74" height="44" rx="7" fill="#00594F" opacity="0.05" stroke="#00594F" strokeWidth="1" opacity="0.15" />
+      <rect x="98" y="10" width="74" height="44" rx="7" fill="#00594F" fillOpacity="0.05" stroke="#00594F" strokeWidth="1" opacity="0.15" />
       <rect x="108" y="20" width="28" height="5" rx="2.5" fill="#00594F" opacity="0.25" />
       <rect x="108" y="30" width="52" height="3.5" rx="1.75" fill="#00594F" opacity="0.1" />
       <rect x="108" y="38" width="36" height="3.5" rx="1.75" fill="#00594F" opacity="0.1" />
       <circle cx="162" cy="20" r="5" fill="#00594F" opacity="0.15" />
-      <rect x="8" y="66" width="74" height="44" rx="7" fill="#CEDC00" opacity="0.07" stroke="#CEDC00" strokeWidth="1" opacity="0.2" />
+      <rect x="8" y="66" width="74" height="44" rx="7" fill="#CEDC00" fillOpacity="0.07" stroke="#CEDC00" strokeWidth="1" opacity="0.2" />
       <rect x="18" y="76" width="28" height="5" rx="2.5" fill="#00594F" opacity="0.25" />
       <rect x="18" y="86" width="52" height="3.5" rx="1.75" fill="#00594F" opacity="0.1" />
       <rect x="18" y="94" width="36" height="3.5" rx="1.75" fill="#00594F" opacity="0.1" />
       <circle cx="72" cy="76" r="5" fill="#CEDC00" opacity="0.45" />
       <path d="M70 76 L71.5 77.5 L74 75" stroke="#00594F" strokeWidth="1" opacity="0.4" strokeLinecap="round" />
-      <rect x="98" y="66" width="74" height="44" rx="7" fill="#00594F" opacity="0.03" stroke="#00594F" strokeWidth="1" opacity="0.1" strokeDasharray="4 3" />
+      <rect x="98" y="66" width="74" height="44" rx="7" fill="#00594F" fillOpacity="0.03" stroke="#00594F" strokeWidth="1" opacity="0.1" strokeDasharray="4 3" />
       <text x="135" y="93" fontSize="22" fill="#00594F" opacity="0.15" textAnchor="middle">+</text>
     </svg>
   );
@@ -142,7 +142,7 @@ function IllustrationInspection() {
       <rect x="52" y="72" width="38" height="4" rx="2" fill="#00594F" opacity="0.12" />
       <rect x="32" y="90" width="12" height="12" rx="3" stroke="#CEDC00" strokeWidth="1.2" opacity="0.4" />
       <rect x="52" y="94" width="34" height="4" rx="2" fill="#00594F" opacity="0.12" />
-      <rect x="124" y="20" width="44" height="40" rx="6" fill="#00594F" opacity="0.05" stroke="#00594F" strokeWidth="1" opacity="0.12" />
+      <rect x="124" y="20" width="44" height="40" rx="6" fill="#00594F" fillOpacity="0.05" stroke="#00594F" strokeWidth="1" opacity="0.12" />
       <circle cx="146" cy="34" r="8" fill="#CEDC00" opacity="0.2" />
       <path d="M143 34 L146 31 L149 34" stroke="#00594F" strokeWidth="1" opacity="0.25" strokeLinecap="round" />
       <line x1="146" y1="31" x2="146" y2="39" stroke="#00594F" strokeWidth="1" opacity="0.2" strokeLinecap="round" />
@@ -154,13 +154,13 @@ function IllustrationInspection() {
 function IllustrationAccess() {
   return (
     <svg viewBox="0 0 180 120" fill="none" className="w-full h-auto">
-      <circle cx="52" cy="36" r="16" fill="#00594F" opacity="0.07" stroke="#00594F" strokeWidth="1.2" opacity="0.15" />
+      <circle cx="52" cy="36" r="16" fill="#00594F" fillOpacity="0.07" stroke="#00594F" strokeWidth="1.2" opacity="0.15" />
       <circle cx="52" cy="30" r="6" fill="#00594F" opacity="0.15" />
       <path d="M40 44 C40 38 45 34 52 34 C59 34 64 38 64 44" stroke="#00594F" strokeWidth="1.2" opacity="0.15" />
-      <circle cx="128" cy="36" r="16" fill="#CEDC00" opacity="0.1" stroke="#CEDC00" strokeWidth="1.2" opacity="0.2" />
+      <circle cx="128" cy="36" r="16" fill="#CEDC00" fillOpacity="0.1" stroke="#CEDC00" strokeWidth="1.2" opacity="0.2" />
       <circle cx="128" cy="30" r="6" fill="#00594F" opacity="0.15" />
       <path d="M116 44 C116 38 121 34 128 34 C135 34 140 38 140 44" stroke="#00594F" strokeWidth="1.2" opacity="0.15" />
-      <circle cx="90" cy="80" r="16" fill="#00594F" opacity="0.04" stroke="#00594F" strokeWidth="1.2" opacity="0.1" />
+      <circle cx="90" cy="80" r="16" fill="#00594F" fillOpacity="0.04" stroke="#00594F" strokeWidth="1.2" opacity="0.1" />
       <circle cx="90" cy="74" r="6" fill="#00594F" opacity="0.12" />
       <path d="M78 88 C78 82 83 78 90 78 C97 78 102 82 102 88" stroke="#00594F" strokeWidth="1.2" opacity="0.12" />
       <line x1="64" y1="46" x2="78" y2="68" stroke="#00594F" strokeWidth="0.8" opacity="0.12" strokeDasharray="3 3" />
