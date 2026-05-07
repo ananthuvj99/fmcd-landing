@@ -5,146 +5,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
 import { MapPin, CheckCircle2, Bell, MessageCircle } from "lucide-react";
 
-const screens: Record<string, React.ReactNode> = {
-  find: (
-    <div className="w-full h-full bg-white rounded-[20px] p-4 flex flex-col">
-      <div className="flex items-center justify-between mb-3">
-        <div>
-          <p className="text-[8px] text-slate-400">Current location</p>
-          <p className="text-[11px] font-bold text-slate-800">South 22nd Street</p>
-        </div>
-        <div className="w-6 h-6 bg-[#00594F]/10 rounded-full" />
-      </div>
-      <div className="w-full h-7 bg-slate-100 rounded-lg mb-3 flex items-center px-2">
-        <span className="text-[8px] text-slate-400">Search shops nearby...</span>
-      </div>
-      <div className="flex gap-2 mb-3">
-        <div className="px-2 py-1 bg-[#00594F] rounded-full"><span className="text-[7px] text-white font-medium">All</span></div>
-        <div className="px-2 py-1 bg-slate-100 rounded-full"><span className="text-[7px] text-slate-500">Oil Change</span></div>
-        <div className="px-2 py-1 bg-slate-100 rounded-full"><span className="text-[7px] text-slate-500">Brakes</span></div>
-      </div>
-      <div className="flex-1 space-y-2">
-        {[{ name: "AutoCare Pro", dist: "2.4 mi", rating: "4.9" }, { name: "Quick Fix Garage", dist: "3.1 mi", rating: "4.7" }, { name: "Metro Auto Shop", dist: "4.8 mi", rating: "4.8" }].map((s) => (
-          <div key={s.name} className="flex items-center gap-2 p-2 bg-slate-50 rounded-xl">
-            <div className="w-8 h-8 bg-[#CEDC00]/20 rounded-lg flex-shrink-0" />
-            <div className="flex-1 min-w-0">
-              <p className="text-[9px] font-bold text-slate-800 truncate">{s.name}</p>
-              <p className="text-[7px] text-slate-400">{s.dist} away</p>
-            </div>
-            <div className="flex items-center gap-0.5">
-              <span className="text-[7px] text-amber-500">★</span>
-              <span className="text-[8px] font-bold text-slate-700">{s.rating}</span>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  ),
-  approve: (
-    <div className="w-full h-full bg-white rounded-[20px] p-4 flex flex-col">
-      <div className="flex items-center gap-2 mb-3">
-        <div className="w-5 h-5 bg-[#00594F]/10 rounded-full flex items-center justify-center">
-          <span className="text-[8px] text-[#00594F]">←</span>
-        </div>
-        <p className="text-[11px] font-bold text-slate-800">Estimate #1042</p>
-      </div>
-      <div className="bg-slate-50 rounded-xl p-2.5 mb-2">
-        <p className="text-[8px] font-medium text-slate-500 mb-1.5">Brake Service</p>
-        <div className="space-y-1.5">
-          {[{ item: "Front Brake Pads", price: "$89" }, { item: "Rotor Resurface (x2)", price: "$120" }, { item: "Labor (1.5 hrs)", price: "$165" }].map((l) => (
-            <div key={l.item} className="flex justify-between">
-              <span className="text-[8px] text-slate-600">{l.item}</span>
-              <span className="text-[8px] font-medium text-slate-800">{l.price}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="flex justify-between items-center py-2 border-t border-slate-100 mb-3">
-        <span className="text-[9px] font-bold text-slate-800">Total</span>
-        <span className="text-[12px] font-bold text-[#00594F]">$374.00</span>
-      </div>
-      <div className="mt-auto flex gap-2">
-        <div className="flex-1 py-2 bg-slate-100 rounded-xl text-center">
-          <span className="text-[8px] font-medium text-slate-500">Decline</span>
-        </div>
-        <div className="flex-1 py-2 bg-[#00594F] rounded-xl text-center">
-          <span className="text-[8px] font-bold text-white">Approve</span>
-        </div>
-      </div>
-    </div>
-  ),
-  updates: (
-    <div className="w-full h-full bg-white rounded-[20px] p-4 flex flex-col">
-      <p className="text-[11px] font-bold text-slate-800 mb-3">Repair Progress</p>
-      <div className="bg-[#00594F]/5 rounded-xl p-2.5 mb-3">
-        <p className="text-[9px] font-bold text-slate-800">2019 Honda Civic</p>
-        <p className="text-[7px] text-slate-400 mt-0.5">Brake Service · AutoCare Pro</p>
-      </div>
-      <div className="flex-1 space-y-0">
-        {[
-          { step: "Dropped off", time: "9:15 AM", done: true },
-          { step: "Inspection done", time: "10:30 AM", done: true },
-          { step: "Work in progress", time: "11:45 AM", done: true },
-          { step: "Quality check", time: "1:20 PM", active: true },
-          { step: "Ready for pickup", time: "", done: false },
-        ].map((s, i) => (
-          <div key={s.step} className="flex gap-2.5 items-start">
-            <div className="flex flex-col items-center">
-              <div className={`w-3.5 h-3.5 rounded-full border-2 flex items-center justify-center ${s.done ? "bg-[#00594F] border-[#00594F]" : s.active ? "border-[#CEDC00] bg-[#CEDC00]" : "border-slate-200 bg-white"}`}>
-                {s.done && <span className="text-[6px] text-white">✓</span>}
-              </div>
-              {i < 4 && <div className={`w-0.5 h-5 ${s.done ? "bg-[#00594F]/20" : "bg-slate-100"}`} />}
-            </div>
-            <div className="pb-2">
-              <p className={`text-[8px] font-medium ${s.done || s.active ? "text-slate-800" : "text-slate-400"}`}>{s.step}</p>
-              {s.time && <p className="text-[7px] text-slate-400">{s.time}</p>}
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  ),
-  chat: (
-    <div className="w-full h-full bg-white rounded-[20px] p-4 flex flex-col">
-      <div className="flex items-center gap-2 mb-3 pb-2 border-b border-slate-100">
-        <div className="w-7 h-7 bg-[#00594F]/10 rounded-full flex items-center justify-center">
-          <span className="text-[8px] font-bold text-[#00594F]">AC</span>
-        </div>
-        <div>
-          <p className="text-[9px] font-bold text-slate-800">AutoCare Pro</p>
-          <p className="text-[7px] text-[#00594F]">Online</p>
-        </div>
-      </div>
-      <div className="flex-1 space-y-2">
-        <div className="flex justify-start">
-          <div className="max-w-[75%] bg-slate-100 rounded-xl rounded-bl-sm px-2.5 py-1.5">
-            <p className="text-[8px] text-slate-700">Hi! Your brake inspection is done. Found some wear on the front pads.</p>
-            <p className="text-[6px] text-slate-400 mt-0.5">10:32 AM</p>
-          </div>
-        </div>
-        <div className="flex justify-end">
-          <div className="max-w-[75%] bg-[#00594F] rounded-xl rounded-br-sm px-2.5 py-1.5">
-            <p className="text-[8px] text-white">Thanks for letting me know. How much will it cost?</p>
-            <p className="text-[6px] text-white/50 mt-0.5">10:33 AM</p>
-          </div>
-        </div>
-        <div className="flex justify-start">
-          <div className="max-w-[75%] bg-slate-100 rounded-xl rounded-bl-sm px-2.5 py-1.5">
-            <p className="text-[8px] text-slate-700">I just sent you the estimate — you can approve it right in the app!</p>
-            <p className="text-[6px] text-slate-400 mt-0.5">10:34 AM</p>
-          </div>
-        </div>
-      </div>
-      <div className="mt-2 flex gap-2">
-        <div className="flex-1 h-7 bg-slate-100 rounded-lg flex items-center px-2">
-          <span className="text-[7px] text-slate-400">Type a message...</span>
-        </div>
-        <div className="w-7 h-7 bg-[#00594F] rounded-lg flex items-center justify-center">
-          <span className="text-[8px] text-white">→</span>
-        </div>
-      </div>
-    </div>
-  ),
+const screenImages: Record<string, string> = {
+  find: "/images/find.png",
+  approve: "/images/approve.png",
+  updates: "/images/updates.png",
+  chat: "/images/chat.png",
 };
 
 const appFeatures = [
@@ -297,30 +162,19 @@ export default function MobileApp() {
                 {/* Notch */}
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-5 bg-slate-900 rounded-b-2xl z-20" />
                 {/* Screen */}
-                <div className="w-full h-full bg-[#f0f2f5] rounded-[28px] overflow-hidden relative">
-                  {/* Status bar */}
-                  <div className="h-8 bg-white flex items-end justify-between px-5 pb-0.5">
-                    <span className="text-[8px] font-bold text-slate-800">9:41</span>
-                    <div className="flex gap-0.5 items-center">
-                      <div className="w-3 h-1.5 bg-slate-800 rounded-sm" />
-                      <div className="w-2 h-2 bg-slate-800 rounded-full" />
-                    </div>
-                  </div>
-                  {/* Dynamic screen content */}
-                  <div className="px-1.5 pb-1.5 h-[calc(100%-32px)]">
-                    <AnimatePresence mode="wait">
-                      <motion.div
-                        key={activeScreen}
-                        initial={{ opacity: 0, y: 8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -8 }}
-                        transition={{ duration: 0.25 }}
-                        className="h-full"
-                      >
-                        {screens[activeScreen]}
-                      </motion.div>
-                    </AnimatePresence>
-                  </div>
+                <div className="w-full h-full rounded-[28px] overflow-hidden relative bg-white">
+                  <AnimatePresence mode="wait">
+                    <motion.img
+                      key={activeScreen}
+                      src={screenImages[activeScreen]}
+                      alt={activeScreen}
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -8 }}
+                      transition={{ duration: 0.25 }}
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </AnimatePresence>
                 </div>
               </div>
             </div>
