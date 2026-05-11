@@ -17,7 +17,7 @@ const appFeatures = [
     id: "find",
     icon: MapPin,
     title: "Find shops nearby",
-    description: "Browse repair shops on a map or list. See services, ratings, and availability — book with one tap.",
+    description: "Browse repair shops on a map or list. See services, ratings, and availability - book with one tap.",
   },
   {
     id: "approve",
@@ -29,7 +29,7 @@ const appFeatures = [
     id: "updates",
     icon: Bell,
     title: "Live repair updates",
-    description: "Push notifications at every stage — when your car goes in, work starts, and it's ready.",
+    description: "Push notifications at every stage - when your car goes in, work starts, and it's ready.",
   },
   {
     id: "chat",
@@ -54,19 +54,20 @@ function FeatureCard({
       onMouseEnter={onHover}
       className={`group cursor-pointer p-4 rounded-2xl border transition-all duration-300 ${
         isActive
-          ? "bg-[#00594F] border-[#00594F] shadow-lg shadow-[#00594F]/15"
+          ? "border-[#00594F]/20 shadow-lg shadow-[#00594F]/10"
           : "bg-white/70 backdrop-blur-sm border-white/80 hover:border-[#00594F]/15"
       }`}
+      style={isActive ? { background: "linear-gradient(135deg, #E1FEE5 0%, #FAFFDC 50%, #E1FEE5 100%)" } : undefined}
     >
       <div className={`w-9 h-9 rounded-xl flex items-center justify-center transition-colors ${
-        isActive ? "bg-white/15" : "bg-[#00594F]/8"
+        isActive ? "bg-[#00594F]/10" : "bg-[#00594F]/8"
       }`}>
-        <feature.icon size={16} className={isActive ? "text-white" : "text-[#00594F]"} />
+        <feature.icon size={16} className="text-[#00594F]" />
       </div>
-      <h3 className={`mt-3 text-sm font-bold transition-colors ${isActive ? "text-white" : "text-slate-900"}`}>
+      <h3 className={`mt-3 text-sm font-bold transition-colors ${isActive ? "text-[#00594F]" : "text-slate-900"}`}>
         {feature.title}
       </h3>
-      <p className={`mt-1 text-xs leading-relaxed transition-colors ${isActive ? "text-white/70" : "text-slate-500"}`}>
+      <p className={`mt-1 text-xs leading-relaxed transition-colors ${isActive ? "text-slate-600" : "text-slate-500"}`}>
         {feature.description}
       </p>
     </motion.div>
@@ -95,13 +96,13 @@ export default function MobileApp() {
         >
           <motion.span
             variants={fadeInUp}
-            className="inline-block text-sm font-semibold text-[#00594F] uppercase tracking-wider px-4 py-1 bg-[#00594F]/5 rounded-full"
+            className="inline-block text-xs font-semibold text-[#00594F] uppercase tracking-[0.18em] px-3 py-1 bg-[#00594F]/5 rounded-full"
           >
             For car owners
           </motion.span>
           <motion.h2
             variants={fadeInUp}
-            className="mt-4 text-3xl sm:text-4xl font-bold text-slate-900"
+            className="mt-5 text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight"
           >
             Your car is in good hands.{" "}
             <span className="gradient-text">Now you&apos;ll know it, too.</span>
@@ -148,7 +149,7 @@ export default function MobileApp() {
             ))}
           </motion.div>
 
-          {/* Center phone mockup */}
+          {/* Center phone mockup — iPhone 15 Pro */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -157,25 +158,75 @@ export default function MobileApp() {
             className="flex justify-center order-first lg:order-none"
           >
             <div className="relative">
-              <div className="absolute -inset-6 bg-[#00594F]/10 rounded-[48px] blur-2xl" />
-              <div className="relative w-[240px] h-[480px] bg-slate-900 rounded-[36px] p-2 shadow-2xl shadow-slate-900/30 border border-slate-700/50">
-                {/* Notch */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-5 bg-slate-900 rounded-b-2xl z-20" />
-                {/* Screen */}
-                <div className="w-full h-full rounded-[28px] overflow-hidden relative bg-white">
-                  <AnimatePresence mode="wait">
-                    <motion.img
-                      key={activeScreen}
-                      src={screenImages[activeScreen]}
-                      alt={activeScreen}
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -8 }}
-                      transition={{ duration: 0.25 }}
-                      className="w-full h-full object-cover object-top"
-                    />
-                  </AnimatePresence>
+              {/* Soft glow behind phone */}
+              <div className="absolute -inset-8 bg-[#00594F]/8 rounded-[60px] blur-3xl" />
+
+              {/* Phone body */}
+              <div className="relative w-[260px] h-[530px]">
+                {/* Titanium frame - outer shell */}
+                <div
+                  className="absolute inset-0 rounded-[50px]"
+                  style={{
+                    background: "linear-gradient(145deg, #e8e8e8 0%, #c4c4c4 30%, #a8a8a8 50%, #c4c4c4 70%, #d8d8d8 100%)",
+                    boxShadow: "0 25px 60px rgba(0,0,0,0.25), 0 8px 20px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.4)",
+                  }}
+                />
+
+                {/* Inner bezel */}
+                <div className="absolute inset-[2px] rounded-[48px] bg-[#1a1a1a]" />
+
+                {/* Side buttons — left */}
+                {/* Silent switch */}
+                <div
+                  className="absolute -left-[2px] top-[100px] w-[2.5px] h-[24px] rounded-l-sm"
+                  style={{ background: "linear-gradient(180deg, #d0d0d0, #a0a0a0, #d0d0d0)" }}
+                />
+                {/* Volume up */}
+                <div
+                  className="absolute -left-[2px] top-[140px] w-[2.5px] h-[38px] rounded-l-sm"
+                  style={{ background: "linear-gradient(180deg, #d0d0d0, #a0a0a0, #d0d0d0)" }}
+                />
+                {/* Volume down */}
+                <div
+                  className="absolute -left-[2px] top-[188px] w-[2.5px] h-[38px] rounded-l-sm"
+                  style={{ background: "linear-gradient(180deg, #d0d0d0, #a0a0a0, #d0d0d0)" }}
+                />
+                {/* Power button — right */}
+                <div
+                  className="absolute -right-[2px] top-[162px] w-[2.5px] h-[52px] rounded-r-sm"
+                  style={{ background: "linear-gradient(180deg, #d0d0d0, #a0a0a0, #d0d0d0)" }}
+                />
+
+                {/* Screen area */}
+                <div className="absolute inset-[6px] rounded-[44px] overflow-hidden bg-black">
+                  {/* Screen content */}
+                  <div className="relative w-full h-full">
+                    <AnimatePresence mode="wait">
+                      <motion.img
+                        key={activeScreen}
+                        src={screenImages[activeScreen]}
+                        alt={activeScreen}
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -8 }}
+                        transition={{ duration: 0.25 }}
+                        className="w-full h-full object-cover object-top"
+                      />
+                    </AnimatePresence>
+
+                    {/* Dynamic Island */}
+                    <div className="absolute top-[10px] left-1/2 -translate-x-1/2 w-[84px] h-[25px] bg-black rounded-full z-10" />
+
+                    {/* Home indicator */}
+                    <div className="absolute bottom-[5px] left-1/2 -translate-x-1/2 w-[96px] h-[4px] bg-black/30 rounded-full z-10" />
+                  </div>
                 </div>
+
+                {/* Screen edge highlight */}
+                <div
+                  className="absolute inset-[6px] rounded-[44px] pointer-events-none"
+                  style={{ boxShadow: "inset 0 0 0 0.5px rgba(255,255,255,0.08)" }}
+                />
               </div>
             </div>
           </motion.div>

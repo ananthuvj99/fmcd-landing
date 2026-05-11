@@ -29,7 +29,7 @@ const footerLinks = [
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-white border-t border-[#00594F]/8">
+    <footer className="relative overflow-hidden bg-white border-t border-[#00594F]/8 rounded-t-[32px] sm:rounded-t-[44px]">
       <div className="absolute inset-0 mint-gradient opacity-30" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-px bg-gradient-to-r from-transparent via-[#00594F]/20 to-transparent" />
 
@@ -42,7 +42,7 @@ export default function Footer() {
               className="h-7 w-auto"
             />
             <p className="mt-4 text-slate-600 text-sm leading-relaxed max-w-xs">
-              The complete auto repair platform — for shops that want to grow and
+              The complete auto repair platform - for shops that want to grow and
               customers who want transparency.
             </p>
             <a

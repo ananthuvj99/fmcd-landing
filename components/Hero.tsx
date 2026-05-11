@@ -16,8 +16,21 @@ export default function Hero() {
   const dashboardY = useTransform(scrollYProgress, [0, 0.5], [60, -320]);
   const dashboardRotate = useTransform(scrollYProgress, [0, 0.35], [4, 0]);
 
-  const headingOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
-  const headingY = useTransform(scrollYProgress, [0, 0.25], [0, -100]);
+  // Keep the heading fully visible while the dashboard scrolls up, then
+  // fade it out at the END — right as the dashboard reaches its final
+  // pinned position (scroll progress 0.5 = dashboardY done at -320).
+  const FADE_START = 0.35;
+  const FADE_END = 0.5;
+  const headingOpacity = useTransform(scrollYProgress, (v: number) => {
+    if (v <= FADE_START) return 1;
+    if (v >= FADE_END) return 0;
+    return 1 - (v - FADE_START) / (FADE_END - FADE_START);
+  });
+  const headingY = useTransform(scrollYProgress, (v: number) => {
+    if (v <= FADE_START) return 0;
+    if (v >= FADE_END) return -60;
+    return -((v - FADE_START) / (FADE_END - FADE_START)) * 60;
+  });
 
   return (
     <section
@@ -54,19 +67,18 @@ export default function Hero() {
               variants={fadeInUp}
               className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-[1.08] tracking-tight text-slate-900"
             >
-              Smarter Shops.{" "}
-              <span className="gradient-text">Happier Customers.</span>
-              <br />
-              One Platform.
+              The Auto Shop Management Software{" "}
+              <span className="gradient-text">Built for Independent Shops.</span>
             </motion.h1>
 
             <motion.p
               variants={fadeInUp}
               className="mt-5 text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto"
             >
-              A powerful web app for shop owners and a clean mobile app for
-              customers — connected in real time. Find, book, and track every
-              repair without ever picking up the phone.
+              Ditch the paper tickets, the phone tag, and the spreadsheets.
+              FixMyCarDude gives your shop cloud-based scheduling, digital
+              estimates, and real-time customer updates - all in one place. Your
+              bays stay full. Your customers stay informed. Your headaches disappear.
             </motion.p>
 
             <motion.div variants={fadeInUp} className="mt-7 flex flex-wrap justify-center gap-3">
@@ -90,7 +102,13 @@ export default function Hero() {
               variants={fadeInUp}
               className="mt-4 text-sm text-slate-500"
             >
-              Cancel anytime · Set up in minutes · Full access from day one
+              No credit card required · Up and running in under an hour · Everything included from day one
+            </motion.p>
+            <motion.p
+              variants={fadeInUp}
+              className="mt-2 text-sm text-[#00594F] font-medium"
+            >
+              Already on Mitchell1 or paper tickets? We make switching painless.
             </motion.p>
           </motion.div>
         </motion.div>

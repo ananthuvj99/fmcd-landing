@@ -6,10 +6,10 @@ import { Monitor, Smartphone } from "lucide-react";
 
 export default function PlatformOverview() {
   return (
-    <section id="platform" className="min-h-screen flex items-center py-20 bg-white relative overflow-hidden">
-      <div className="absolute inset-0 dot-pattern opacity-50" />
+    <section id="platform" className="py-20 sm:py-24 bg-white relative overflow-hidden">
+      <div className="absolute inset-0 dot-pattern opacity-40" />
 
-      <div className="relative max-w-7xl mx-auto px-6">
+      <div className="relative max-w-6xl mx-auto px-6">
         {/* Heading */}
         <motion.div
           variants={staggerContainer}
@@ -20,111 +20,95 @@ export default function PlatformOverview() {
         >
           <motion.span
             variants={fadeInUp}
-            className="inline-block text-sm font-semibold text-[#00594F] uppercase tracking-wider px-4 py-1 bg-[#00594F]/5 rounded-full"
+            className="inline-block text-xs font-semibold text-[#00594F] uppercase tracking-[0.18em] px-3 py-1 bg-[#00594F]/5 rounded-full"
           >
             The platform
           </motion.span>
           <motion.h2
             variants={fadeInUp}
-            className="mt-5 text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900"
+            className="mt-5 text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight"
           >
             One platform.{" "}
-            <span className="gradient-text">Two powerful experiences.</span>
+            <span className="gradient-text">Your whole shop - finally organized.</span>
           </motion.h2>
           <motion.p
             variants={fadeInUp}
-            className="mt-5 text-lg text-slate-500 leading-relaxed"
+            className="mt-5 text-base sm:text-lg text-slate-500 leading-relaxed"
           >
-            Most shop software stops at the garage door. FixMyCarDude goes
-            further — connecting shop owners and customers on a single, real-time
-            platform.
+            Independent shops run on too many disconnected tools. FixMyCarDude
+            replaces all of them - scheduling, estimates, customer updates,
+            technician workflows - in one cloud-based system.
           </motion.p>
         </motion.div>
 
-        {/* Two cards side by side */}
+        {/* Row 1 — Web App: text left, image right */}
         <motion.div
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          className="mt-16 grid md:grid-cols-2 gap-6"
+          viewport={{ once: true, margin: "-80px" }}
+          className="mt-16 lg:mt-20 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center"
         >
-          {/* Service Providers */}
-          <motion.div
-            variants={fadeInUp}
-            className="group relative rounded-3xl overflow-hidden bg-white border border-slate-100 hover:shadow-2xl hover:shadow-[#00594F]/8 transition-all duration-500"
-          >
-            <div className="relative h-72 sm:h-80 overflow-hidden">
-              <img
-                src="/images/service-providers.jpg"
-                alt="Service provider managing their shop"
-                className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent" />
-              <div className="absolute top-4 left-4">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-semibold text-[#00594F] border border-[#00594F]/10">
-                  <Monitor size={12} />
-                  Web App
-                </span>
-              </div>
-            </div>
-            <div className="p-6 pt-2">
-              <h3 className="text-xl font-bold text-slate-900">
-                For Service Providers
-              </h3>
-              <p className="mt-2 text-sm text-slate-500 leading-relaxed">
-                A browser-based management platform for shop owners, service
-                advisors, and technicians. Handle appointments, invoicing, and
-                profitability tracking — all from one dashboard.
-              </p>
-            </div>
+          <motion.div variants={fadeInUp}>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#00594F]/5 rounded-full text-xs font-semibold text-[#00594F] border border-[#00594F]/10">
+              <Monitor size={12} />
+              Web App
+            </span>
+            <h3 className="mt-4 text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 leading-tight tracking-tight">
+              Run your shop from a single dashboard.
+            </h3>
+            <p className="mt-4 text-slate-500 leading-relaxed max-w-lg">
+              Digital estimates, appointment scheduling, technician job
+              assignments, invoicing, and real-time profit tracking - built for
+              1-5 bay independent shops. No paper. No switching apps.
+            </p>
           </motion.div>
 
-          {/* Customers */}
-          <motion.div
-            variants={fadeInUp}
-            className="group relative rounded-3xl overflow-hidden bg-white border border-slate-100 hover:shadow-2xl hover:shadow-[#00594F]/8 transition-all duration-500"
-          >
-            <div className="relative h-72 sm:h-80 overflow-hidden">
+          <motion.div variants={fadeInUp} className="relative max-w-md mx-auto lg:mx-0 lg:ml-auto w-full">
+            <div className="relative rounded-3xl overflow-hidden aspect-[4/3]">
               <img
-                src="/images/customers.jpg"
-                alt="Customer using FixMyCarDude app"
-                className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                src="/images/service-providers.jpg"
+                alt="Shop owner using FixMyCarDude dashboard"
+                className="w-full h-full object-cover object-top"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent" />
-              <div className="absolute top-4 left-4">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-semibold text-[#00594F] border border-[#00594F]/10">
-                  <Smartphone size={12} />
-                  Mobile App
-                </span>
-              </div>
             </div>
-            <div className="p-6 pt-2">
-              <h3 className="text-xl font-bold text-slate-900">
-                For Customers
-              </h3>
-              <p className="mt-2 text-sm text-slate-500 leading-relaxed">
-                A clean mobile app that lets customers find a shop, book a
-                service, and track every repair in real time — no more phone tag
-                or mystery invoices.
-              </p>
-            </div>
+            <div className="absolute -bottom-6 -left-6 w-28 h-28 rounded-full bg-[#CEDC00]/30 blur-3xl -z-10" />
           </motion.div>
         </motion.div>
 
-        {/* Connecting line */}
+        {/* Row 2 — Mobile App: image left, text right */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-          className="flex items-center justify-center mt-10 gap-4"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          className="mt-20 lg:mt-24 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center"
         >
-          <div className="h-px flex-1 max-w-24 bg-gradient-to-r from-transparent to-[#00594F]/30" />
-          <div className="px-4 py-2 bg-[#00594F]/5 rounded-full text-xs font-medium text-[#00594F] border border-[#00594F]/10">
-            Connected in real time
-          </div>
-          <div className="h-px flex-1 max-w-24 bg-gradient-to-l from-transparent to-[#00594F]/30" />
+          <motion.div variants={fadeInUp} className="relative max-w-md mx-auto lg:mx-0 lg:mr-auto w-full lg:order-1">
+            <div className="relative rounded-3xl overflow-hidden aspect-[4/3]">
+              <img
+                src="/images/customers.jpg"
+                alt="Customer using FixMyCarDude mobile app"
+                className="w-full h-full object-cover object-center"
+              />
+            </div>
+            <div className="absolute -top-6 -right-6 w-28 h-28 rounded-full bg-[#00594F]/15 blur-3xl -z-10" />
+          </motion.div>
+
+          <motion.div variants={fadeInUp} className="lg:order-2">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#00594F]/5 rounded-full text-xs font-semibold text-[#00594F] border border-[#00594F]/10">
+              <Smartphone size={12} />
+              Mobile App
+            </span>
+            <h3 className="mt-4 text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 leading-tight tracking-tight">
+              Your customers deserve better than a phone call and a prayer.
+            </h3>
+            <p className="mt-4 text-slate-500 leading-relaxed max-w-lg">
+              Give them a free app to book, approve estimates, and track their
+              repair in real time. Higher approval rates, fewer calls, more
+              repeat business.
+            </p>
+          </motion.div>
         </motion.div>
       </div>
     </section>

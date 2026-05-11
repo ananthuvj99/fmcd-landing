@@ -14,12 +14,12 @@ const categories = [
       { name: "Appointment scheduling", desc: "Slot-based booking with drop-off hour controls and appointment history.", live: true },
       { name: "Estimate builder", desc: "DVI-linked estimates with services, parts, and customer approval flow.", live: true },
       { name: "Invoice & payment", desc: "Send invoices, accept payments, and configure all fee types.", live: true },
-      { name: "Profitability reports", desc: "Revenue, labor, parts costs, and net profit — with date range controls.", live: true },
+      { name: "Profitability reports", desc: "Revenue, labor, parts costs, and net profit - with date range controls.", live: true },
       { name: "Courtesy inspection", desc: "Vehicle condition checklist with photo documentation on arrival.", live: true },
       { name: "Technician job board", desc: "Assigned tasks, part status, and labor reference for each tech.", live: true },
       { name: "Customer profiles", desc: "New vs. returning tracking, service history, and notes per vehicle.", live: true },
-      { name: "Role-based access", desc: "Owner, admin, advisor, and technician views — each tailored to the role.", live: true },
-      { name: "VIN scanner", desc: "Point and capture — vehicle details auto-fill, no manual entry.", live: true },
+      { name: "Role-based access", desc: "Owner, admin, advisor, and technician views - each tailored to the role.", live: true },
+      { name: "VIN scanner", desc: "Point and capture - vehicle details auto-fill, no manual entry.", live: true },
     ],
   },
   {
@@ -50,7 +50,7 @@ export default function FeatureList() {
   const activeCat = categories.find((c) => c.id === activeTab)!;
 
   return (
-    <section className="py-20 bg-white relative overflow-hidden">
+    <section className="py-20 sm:py-24 bg-white relative overflow-hidden">
       <div className="absolute inset-0 dot-pattern opacity-30" />
 
       <div className="relative max-w-6xl mx-auto px-6">
@@ -63,22 +63,22 @@ export default function FeatureList() {
         >
           <motion.span
             variants={fadeInUp}
-            className="inline-block text-sm font-semibold text-[#00594F] uppercase tracking-wider px-4 py-1 bg-[#00594F]/5 rounded-full"
+            className="inline-block text-xs font-semibold text-[#00594F] uppercase tracking-[0.18em] px-3 py-1 bg-[#00594F]/5 rounded-full"
           >
             Everything included
           </motion.span>
           <motion.h2
             variants={fadeInUp}
-            className="mt-4 text-3xl sm:text-4xl font-bold text-slate-900"
+            className="mt-5 text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight"
           >
             No add-ons. No surprises.{" "}
             <span className="gradient-text">Everything&apos;s in the box.</span>
           </motion.h2>
           <motion.p
             variants={fadeInUp}
-            className="mt-4 text-lg text-slate-500"
+            className="mt-5 text-base sm:text-lg text-slate-500 leading-relaxed"
           >
-            Every plan includes the full platform — shop web app,
+            Every plan includes the full platform - shop web app,
             customer-facing tools, and all features below.
           </motion.p>
         </motion.div>

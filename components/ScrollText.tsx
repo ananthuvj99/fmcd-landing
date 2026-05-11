@@ -4,53 +4,59 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 const words = [
-  "FixMyCarDude",
-  "is",
-  "a",
-  "complete",
-  "auto",
-  "repair",
-  "platform",
-  "that",
-  "connects",
-  "shop",
-  "owners",
-  "and",
-  "customers",
+  "Independent",
+  "shops",
+  "run",
   "on",
-  "a",
-  "single,",
-  "real-time",
-  "system",
-  "—",
-  "so",
-  "every",
-  "repair",
-  "is",
-  "faster,",
-  "clearer,",
-  "and",
-  "fully",
-  "transparent.",
+  "too",
+  "many",
+  "disconnected",
+  "tools.",
+  "FixMyCarDude",
+  "replaces",
+  "all",
+  "of",
+  "them",
+  "-",
+  "scheduling,",
+  "estimates,",
+  "customer",
+  "updates,",
+  "technician",
+  "workflows",
+  "-",
+  "in",
+  "one",
+  "cloud-based",
+  "system.",
 ];
 
-const highlightWords = new Set(["FixMyCarDude", "connects", "real-time", "transparent."]);
+const highlightWords = new Set(["FixMyCarDude", "replaces", "cloud-based", "system."]);
 
 function Word({
   word,
   index,
   total,
   scrollYProgress,
+  revealEnd,
 }: {
   word: string;
   index: number;
   total: number;
   scrollYProgress: ReturnType<typeof useScroll>["scrollYProgress"];
+  revealEnd: number;
 }) {
-  const start = index / total;
-  const end = start + 1 / total;
+  // Distribute word reveals across [0, revealEnd] of the pin range.
+  // Explicit callback clamps opacity at endpoints so it stays at 1 for
+  // the entire held-state — never depends on framer's default clamping.
+  const start = (index / total) * revealEnd;
+  const end = ((index + 1) / total) * revealEnd;
 
-  const opacity = useTransform(scrollYProgress, [start, end], [0.12, 1]);
+  const opacity = useTransform(scrollYProgress, (v: number) => {
+    if (v <= start) return 0.12;
+    if (v >= end) return 1;
+    return 0.12 + ((v - start) / (end - start)) * (1 - 0.12);
+  });
   const isHighlight = highlightWords.has(word);
 
   return (
@@ -69,15 +75,22 @@ function Word({
 
 export default function ScrollText() {
   const containerRef = useRef<HTMLDivElement>(null);
+  // Aligning offset to the sticky pin window so the reveal completes
+  // BEFORE the section releases to the next one.
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start end", "end start"],
+    offset: ["start start", "end end"],
   });
+
+  // Reveal completes at 50% of the pin — the remaining 50% is a
+  // generous "fully revealed and held" buffer so on tall viewports the
+  // text is unmistakably done before the next section can ever appear.
+  const REVEAL_END = 0.5;
 
   return (
     <section
       ref={containerRef}
-      className="relative h-[200vh]"
+      className="relative h-[260vh]"
     >
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-white" />
@@ -91,6 +104,7 @@ export default function ScrollText() {
                 index={i}
                 total={words.length}
                 scrollYProgress={scrollYProgress}
+                revealEnd={REVEAL_END}
               />
             ))}
           </p>

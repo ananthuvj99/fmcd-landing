@@ -9,6 +9,7 @@ const navLinks = [
   { href: "#features", label: "Features" },
   { href: "#mobile-app", label: "Mobile App" },
   { href: "#integrations", label: "Integrations" },
+  { href: "#pricing", label: "Pricing" },
 ];
 
 export default function Navbar() {
