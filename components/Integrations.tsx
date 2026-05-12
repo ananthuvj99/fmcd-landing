@@ -29,24 +29,10 @@ const integrations = [
 ];
 
 function LogoIcon({ item }: { item: (typeof integrations)[0] }) {
-  if (item.logoSrc) {
-    return (
-      <div className="w-16 h-16 rounded-2xl flex items-center justify-center bg-white shadow-lg shadow-slate-200/60 border border-slate-100 p-3">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={item.logoSrc} alt={`${item.name} logo`} className="w-full h-full object-contain" />
-      </div>
-    );
-  }
   return (
-    <div
-      className="w-16 h-16 rounded-2xl flex items-center justify-center text-white font-bold text-xs shadow-lg"
-      style={{ background: item.color }}
-    >
-      <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none">
-        <path d="M6 6L12 10L18 6" stroke="white" strokeWidth="2" strokeLinecap="round" opacity="0.9" />
-        <path d="M6 12L12 16L18 12" stroke="white" strokeWidth="2" strokeLinecap="round" opacity="0.6" />
-        <path d="M6 18L12 22L18 18" stroke="white" strokeWidth="2" strokeLinecap="round" opacity="0.4" />
-      </svg>
+    <div className="w-16 h-16 rounded-2xl flex items-center justify-center bg-white shadow-lg shadow-slate-200/60 border border-slate-100 p-3">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={item.logoSrc} alt={`${item.name} logo`} className="w-full h-full object-contain" />
     </div>
   );
 }
@@ -169,7 +155,7 @@ export default function Integrations() {
                     {/* Glow */}
                     <div
                       className="absolute -inset-4 rounded-2xl blur-xl transition-opacity duration-300"
-                      style={{ background: item.color ?? "#00594F", opacity: isActive ? 0.2 : 0.08 }}
+                      style={{ background: "#00594F", opacity: isActive ? 0.2 : 0.08 }}
                     />
                     <LogoIcon item={item} />
                   </motion.div>
