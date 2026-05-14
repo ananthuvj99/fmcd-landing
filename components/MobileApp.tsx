@@ -16,26 +16,26 @@ const appFeatures = [
   {
     id: "find",
     icon: MapPin,
-    title: "Find shops nearby",
-    description: "Browse repair shops on a map or list. See services, ratings, and availability - book with one tap.",
+    title: "Customers find you",
+    description: "Show up as a recommended service provider in the FixMyCarDude app - customers see your services, ratings, and availability, and book with one tap.",
   },
   {
     id: "approve",
     icon: CheckCircle2,
-    title: "Approve estimates",
-    description: "Review what's being done to your vehicle, line by line. Approve, decline, or ask questions.",
+    title: "Customers approve estimates",
+    description: "Send digital estimates straight to their phone - customers review line items, approve, decline, or ask questions. No phone tag.",
   },
   {
     id: "updates",
     icon: Bell,
-    title: "Live repair updates",
-    description: "Push notifications at every stage - when your car goes in, work starts, and it's ready.",
+    title: "Customers stay informed",
+    description: "Push notifications at every stage - when the car goes in, work starts, and it's ready for pickup. No more status calls.",
   },
   {
     id: "chat",
     icon: MessageCircle,
-    title: "Chat with your shop",
-    description: "Message the shop directly inside the app. No hold music. No missed calls.",
+    title: "Customers message you",
+    description: "Direct in-app chat tied to each appointment. No hold music, no missed calls, no external texting apps.",
   },
 ];
 
@@ -104,8 +104,8 @@ export default function MobileApp() {
             variants={fadeInUp}
             className="mt-5 text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight"
           >
-            Your car is in good hands.{" "}
-            <span className="gradient-text">Now you&apos;ll know it, too.</span>
+            Stay connected completely.{" "}
+            <span className="gradient-text">Your customer gets updates automatically.</span>
           </motion.h2>
           <motion.div variants={fadeInUp} className="mt-6 flex flex-wrap justify-center gap-3">
             <a href="#" className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#00594F] text-white rounded-xl hover:bg-[#003d35] transition-colors hover:shadow-lg hover:shadow-[#00594F]/20">

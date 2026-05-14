@@ -5,11 +5,11 @@ import { motion, AnimatePresence, useMotionValueEvent, useScroll } from "framer-
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { href: "#platform", label: "Overview" },
-  { href: "#features", label: "Features" },
-  { href: "#mobile-app", label: "Mobile App" },
-  { href: "#integrations", label: "Integrations" },
-  { href: "#pricing", label: "Pricing" },
+  { href: "/#platform", label: "Overview" },
+  { href: "/#features", label: "Features" },
+  { href: "/#mobile-app", label: "Mobile App" },
+  { href: "/#integrations", label: "Integrations" },
+  { href: "/#pricing", label: "Pricing" },
 ];
 
 export default function Navbar() {
@@ -40,7 +40,7 @@ export default function Navbar() {
         scrolled ? "navbar-pill rounded-full" : "rounded-2xl"
       }`}>
         <div className="px-4 sm:px-6 h-14 flex items-center justify-between">
-          <a href="#" className="flex items-center group">
+          <a href="/" className="flex items-center group">
             <img
               src="/images/logo.svg"
               alt="FixMyCarDude"
@@ -62,13 +62,13 @@ export default function Navbar() {
 
           <div className="hidden md:flex items-center gap-2">
             <a
-              href="#contact"
+              href="/#contact"
               className="px-4 py-2 text-sm font-medium text-slate-700 hover:text-[#00594F] transition-colors"
             >
               Demo
             </a>
             <a
-              href="#contact"
+              href="/#contact"
               className="px-5 py-2.5 bg-[#00594F] text-white text-sm font-semibold rounded-full hover:bg-[#003d35] transition-all hover:shadow-lg hover:shadow-[#00594F]/30 hover:-translate-y-0.5"
             >
               Get Started
@@ -104,7 +104,7 @@ export default function Navbar() {
                   </a>
                 ))}
                 <a
-                  href="#contact"
+                  href="/#contact"
                   onClick={() => setMobileOpen(false)}
                   className="mt-2 px-5 py-2.5 bg-[#00594F] text-white text-sm font-semibold rounded-full text-center"
                 >

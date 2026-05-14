@@ -49,7 +49,7 @@ export default function Hero() {
         {/* Heading */}
         <motion.div
           style={{ opacity: headingOpacity, y: headingY }}
-          className="relative z-10 max-w-4xl mx-auto px-6 text-center"
+          className="relative z-10 max-w-5xl xl:max-w-6xl mx-auto px-6 text-center"
         >
           <motion.div
             variants={staggerContainer}
@@ -67,18 +67,17 @@ export default function Hero() {
               variants={fadeInUp}
               className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-[1.08] tracking-tight text-slate-900"
             >
-              The Auto Shop Management Software{" "}
-              <span className="gradient-text">Built for Independent Shops.</span>
+              The Auto Shop Management Software
+              <span className="gradient-text block">Built for Independent Shops.</span>
             </motion.h1>
 
             <motion.p
               variants={fadeInUp}
               className="mt-5 text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto"
             >
-              Ditch the paper tickets, the phone tag, and the spreadsheets.
-              FixMyCarDude gives your shop cloud-based scheduling, digital
-              estimates, and real-time customer updates - all in one place. Your
-              bays stay full. Your customers stay informed. Your headaches disappear.
+              Ditch the paper tickets, phone tag, and spreadsheets.
+              FixMyCarDude brings scheduling, estimates, and real-time updates
+              into one place. Full bays. Happy customers. Zero headaches.
             </motion.p>
 
             <motion.div variants={fadeInUp} className="mt-7 flex flex-wrap justify-center gap-3">
@@ -86,7 +85,7 @@ export default function Hero() {
                 href="#contact"
                 className="group inline-flex items-center gap-2 px-7 py-3.5 bg-[#00594F] text-white font-semibold rounded-full hover:bg-[#003d35] transition-all hover:shadow-xl hover:shadow-[#00594F]/25 hover:-translate-y-0.5"
               >
-                Start Free 14-Day Trial
+                Start Free 21-Day Trial
                 <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </a>
               <a

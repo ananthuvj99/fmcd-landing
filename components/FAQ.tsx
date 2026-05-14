@@ -19,7 +19,7 @@ const faqs = [
   {
     question: "Is there a free trial?",
     answer:
-      "Yes - 14 days, full platform access, no credit card required. You get everything from day one: scheduling, digital estimates, DVI, customer messaging, invoicing, and profitability reporting.",
+      "Yes - 21 days, full platform access, no credit card required. You get everything from day one: scheduling, digital estimates, DVI, customer messaging, invoicing, and profitability reporting.",
   },
   {
     question: "How long does setup take?",

@@ -17,9 +17,9 @@ const plans = [
   {
     icon: Zap,
     name: "Annual",
-    price: "$347",
+    price: "$297",
     unit: "per month",
-    label: "Billed annually (Save 10%)",
+    label: "Billed annually",
     description: "Best value for growing shops.",
     highlight: true,
     badge: "Most Popular",
@@ -27,7 +27,7 @@ const plans = [
   {
     icon: Star,
     name: "Monthly",
-    price: "$397",
+    price: "$347",
     unit: "per month",
     label: "Billed monthly",
     description: "Full flexibility, cancel anytime.",
@@ -67,7 +67,7 @@ export default function Pricing() {
             className="mt-5 text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight"
           >
             Flat pricing. Every feature.{" "}
-            <span className="gradient-text">No gotchas.</span>
+            <span className="gradient-text">No surprises.</span>
           </motion.h2>
           <motion.p
             variants={fadeInUp}

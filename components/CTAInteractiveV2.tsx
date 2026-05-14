@@ -12,6 +12,20 @@ function clamp01(v: number, start: number, end: number) {
 
 /* ── Sticky notes ── */
 
+// Darken (or lighten with positive amt) a hex color by `amt` percentage points
+function shade(hex: string, amt: number): string {
+  const m = hex.replace("#", "");
+  const num = parseInt(m, 16);
+  let r = (num >> 16) & 0xff;
+  let g = (num >> 8) & 0xff;
+  let b = num & 0xff;
+  const adj = (c: number) => Math.max(0, Math.min(255, Math.round(c + (amt / 100) * 255)));
+  r = adj(r);
+  g = adj(g);
+  b = adj(b);
+  return `#${((r << 16) | (g << 8) | b).toString(16).padStart(6, "0")}`;
+}
+
 const stickyNotes = [
   { text: "Call back Mrs. Johnson\nabout brake job", color: "#FEF08A", rotate: -4, x: 5, y: 6 },
   { text: "Order pads for\n2019 Camry", color: "#FCA5A5", rotate: 5, x: 58, y: 3 },
@@ -56,7 +70,7 @@ function StickyNote({ note, index }: { note: typeof stickyNotes[0]; index: numbe
         transition={{ delay: 0.15 + index * 0.07, type: "spring", stiffness: 180, damping: 18 }}
       >
         <motion.div
-          className="w-[120px] sm:w-[145px] lg:w-[165px]"
+          className="w-[150px] h-[150px] sm:w-[170px] sm:h-[170px] lg:w-[190px] lg:h-[190px]"
           animate={
             fallen && entered
               ? { y: 800, rotate: exitRotate, opacity: 0 }
@@ -67,20 +81,49 @@ function StickyNote({ note, index }: { note: typeof stickyNotes[0]; index: numbe
               ? { duration: 0.9, ease: [0.4, 0, 0.2, 1] }
               : { duration: 0 }
           }
+          style={{
+            filter:
+              "drop-shadow(3px 6px 8px rgba(0,0,0,0.15)) drop-shadow(0 1px 2px rgba(0,0,0,0.08))",
+          }}
         >
           <div
-            className="relative p-3 sm:p-3.5 rounded-[2px] text-[10px] sm:text-[11px] lg:text-xs font-bold leading-snug text-slate-700 whitespace-pre-line"
+            className="relative w-full h-full p-4 sm:p-5 text-[12px] sm:text-[13px] lg:text-sm font-semibold leading-snug text-slate-800 whitespace-pre-line"
             style={{
-              backgroundColor: note.color,
-              boxShadow: "2px 4px 16px rgba(0,0,0,0.1), 0 1px 4px rgba(0,0,0,0.06)",
+              background: `linear-gradient(135deg, ${note.color} 0%, ${note.color} 60%, ${shade(note.color, -8)} 100%)`,
+              clipPath:
+                "polygon(0 0, 100% 0, 100% 82%, 82% 100%, 0 100%)",
             }}
           >
+            {/* Tape strip at top */}
             <div
-              className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-7 h-3 rounded-sm"
-              style={{ backgroundColor: "rgba(0,0,0,0.06)", border: "1px solid rgba(0,0,0,0.04)" }}
+              className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-10 h-4 rounded-[1px]"
+              style={{
+                background: "rgba(255,255,255,0.45)",
+                borderTop: "1px solid rgba(255,255,255,0.6)",
+                borderBottom: "1px solid rgba(0,0,0,0.05)",
+                boxShadow: "0 1px 2px rgba(0,0,0,0.08)",
+              }}
             />
-            {note.text}
+            {/* Note content */}
+            <span className="block pt-1.5">{note.text}</span>
           </div>
+
+          {/* Curled corner — small triangle in the cut-off area showing
+              the page peeling up. Sits behind the clipped note. */}
+          <div
+            className="absolute pointer-events-none"
+            style={{
+              right: 0,
+              bottom: 0,
+              width: "18%",
+              height: "18%",
+              background: `linear-gradient(135deg, transparent 50%, ${shade(
+                note.color,
+                -20
+              )} 50%, ${shade(note.color, -8)} 100%)`,
+              borderBottomRightRadius: "4px",
+            }}
+          />
         </motion.div>
       </motion.div>
     </div>
@@ -271,7 +314,7 @@ export default function CTAInteractiveV2() {
                           </h3>
                           <p className="mt-3 text-white/55 text-sm sm:text-base max-w-md leading-relaxed">
                             Scan to install the customer app, or get the shop dashboard
-                            on the web. Free for 14 days.
+                            on the web. Free for 21 days.
                           </p>
                         </div>
 

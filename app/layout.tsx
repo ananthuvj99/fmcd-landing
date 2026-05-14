@@ -11,7 +11,7 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "FixMyCarDude | Auto Shop Management Software for Independent Shops",
   description:
-    "Cloud-based auto repair shop software with digital estimates, scheduling, DVI, and customer messaging. Built for owner-operated shops. Start your free 14-day trial.",
+    "Cloud-based auto repair shop software with digital estimates, scheduling, DVI, and customer messaging. Built for owner-operated shops. Start your free 21-day trial.",
   openGraph: {
     title: "FixMyCarDude | Auto Shop Management Software for Independent Shops",
     description:
@@ -36,9 +36,9 @@ const jsonLd = {
       "url": "https://fixmycardude.com",
       "offers": {
         "@type": "Offer",
-        "price": "347",
+        "price": "297",
         "priceCurrency": "USD",
-        "description": "Billed annually (Save 10%)",
+        "description": "Billed annually",
       },
     },
     {
@@ -65,7 +65,7 @@ const jsonLd = {
           "name": "Is there a free trial?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes - 14 days, full platform access, no credit card required. You get everything from day one: scheduling, digital estimates, DVI, customer messaging, invoicing, and profitability reporting.",
+            "text": "Yes - 21 days, full platform access, no credit card required. You get everything from day one: scheduling, digital estimates, DVI, customer messaging, invoicing, and profitability reporting.",
           },
         },
         {

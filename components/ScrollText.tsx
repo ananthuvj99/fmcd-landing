@@ -25,13 +25,22 @@ const words = [
   "technician",
   "workflows",
   "-",
+  "All",
   "in",
   "one",
+  "easy",
   "cloud-based",
   "system.",
 ];
 
-const highlightWords = new Set(["FixMyCarDude", "replaces", "cloud-based", "system."]);
+const highlightWords = new Set([
+  "FixMyCarDude",
+  "replaces",
+  "All",
+  "easy",
+  "cloud-based",
+  "system.",
+]);
 
 function Word({
   word,

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
-import { Check, Clock, Settings, MessageSquare, Rocket } from "lucide-react";
+import { Check, Settings, MessageSquare } from "lucide-react";
 
 const categories = [
   {
@@ -31,16 +31,6 @@ const categories = [
       { name: "SMS notifications", desc: "Customers get texts for updates, estimate links, and invoices.", live: true },
       { name: "Push notifications", desc: "Real-time alerts on the customer app for messages and status changes.", live: true },
       { name: "Estimate approval flow", desc: "Customers approve or decline line items remotely.", live: true },
-    ],
-  },
-  {
-    id: "coming",
-    label: "Coming Soon",
-    icon: Rocket,
-    features: [
-      { name: "Motor.com labor data", desc: "Pull OEM labor times and pricing guides directly into job estimates.", live: false },
-      { name: "QuickBooks sync", desc: "Auto-sync invoices and revenue to your accounting software.", live: false },
-      { name: "Multi-rate pricing", desc: "Set different labor rates for European cars, fleet accounts, and more.", live: false },
     ],
   },
 ];
@@ -138,16 +128,8 @@ export default function FeatureList() {
                   className="group relative bg-white rounded-xl p-4 border border-slate-100 hover:border-[#00594F]/15 hover:shadow-lg hover:shadow-[#00594F]/5 transition-all duration-300"
                 >
                   <div className="flex items-start gap-3">
-                    <div className={`mt-0.5 w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors ${
-                      f.live
-                        ? "bg-[#00594F]/8 group-hover:bg-[#00594F] text-[#00594F] group-hover:text-white"
-                        : "bg-amber-50 text-amber-500"
-                    }`}>
-                      {f.live ? (
-                        <Check size={13} strokeWidth={2.5} />
-                      ) : (
-                        <Clock size={13} />
-                      )}
+                    <div className="mt-0.5 w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors bg-[#00594F]/8 group-hover:bg-[#00594F] text-[#00594F] group-hover:text-white">
+                      <Check size={13} strokeWidth={2.5} />
                     </div>
                     <div>
                       <p className="text-sm font-semibold text-slate-900">{f.name}</p>

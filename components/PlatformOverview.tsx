@@ -28,8 +28,8 @@ export default function PlatformOverview() {
             variants={fadeInUp}
             className="mt-5 text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight"
           >
-            One platform.{" "}
-            <span className="gradient-text">Your whole shop - finally organized.</span>
+            One platform{" "}
+            <span className="gradient-text">organizes your entire shop.</span>
           </motion.h2>
           <motion.p
             variants={fadeInUp}

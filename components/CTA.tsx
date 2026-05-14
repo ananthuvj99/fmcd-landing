@@ -1,41 +1,110 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
 import { ArrowRight, Calendar } from "lucide-react";
 
+function clamp01(v: number, start: number, end: number) {
+  if (v <= start) return 0;
+  if (v >= end) return 1;
+  return (v - start) / (end - start);
+}
+
 export default function CTA() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    // 0 = section top hits viewport top (pin start), 1 = pin release
+    offset: ["start start", "end end"],
+  });
+
+  // Card scales from 0.55 → 1.0 across the first 75% of the pin,
+  // then holds for the last 25% before unsticking.
+  const cardScale = useTransform(scrollYProgress, (v: number) => {
+    const p = clamp01(v, 0, 0.75);
+    return 0.55 + p * 0.45;
+  });
+
+  // Ripple rings — three concentric circles pulsing during the scale-up
+  const ripple1Scale = useTransform(
+    scrollYProgress,
+    (v: number) => 0.5 + clamp01(v, 0, 0.85) * 1.8
+  );
+  const ripple1Opacity = useTransform(scrollYProgress, (v: number) => {
+    const p = clamp01(v, 0, 0.85);
+    return Math.sin(p * Math.PI) * 0.45;
+  });
+  const ripple2Scale = useTransform(
+    scrollYProgress,
+    (v: number) => 0.4 + clamp01(v, 0.05, 0.9) * 2.2
+  );
+  const ripple2Opacity = useTransform(scrollYProgress, (v: number) => {
+    const p = clamp01(v, 0.05, 0.9);
+    return Math.sin(p * Math.PI) * 0.35;
+  });
+  const ripple3Scale = useTransform(
+    scrollYProgress,
+    (v: number) => 0.3 + clamp01(v, 0.1, 0.95) * 2.7
+  );
+  const ripple3Opacity = useTransform(scrollYProgress, (v: number) => {
+    const p = clamp01(v, 0.1, 0.95);
+    return Math.sin(p * Math.PI) * 0.25;
+  });
+
   return (
-    <section className="py-16 px-6 relative">
-      <motion.div
-        variants={staggerContainer}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-50px" }}
-        className="relative max-w-6xl mx-auto rounded-[28px] overflow-hidden bg-[#0a1a17] shadow-2xl shadow-[#00594F]/20"
-      >
+    <section
+      ref={sectionRef}
+      className="relative h-[200vh] bg-white"
+    >
+      <div className="sticky top-0 h-screen overflow-hidden flex items-center justify-center px-6">
+        {/* Ripple rings — concentric circles emanating from card center */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <motion.div
+            className="absolute w-[600px] h-[600px] rounded-full border-2 border-[#00594F]/30"
+            style={{ scale: ripple1Scale, opacity: ripple1Opacity }}
+          />
+          <motion.div
+            className="absolute w-[600px] h-[600px] rounded-full border-2 border-[#CEDC00]/50"
+            style={{ scale: ripple2Scale, opacity: ripple2Opacity }}
+          />
+          <motion.div
+            className="absolute w-[600px] h-[600px] rounded-full border-2 border-[#00594F]/25"
+            style={{ scale: ripple3Scale, opacity: ripple3Opacity }}
+          />
+        </div>
+
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          style={{ scale: cardScale }}
+          className="relative w-full max-w-6xl mx-auto rounded-[28px] overflow-hidden bg-[#00594F] shadow-2xl shadow-[#00594F]/30"
+        >
         {/* Background image */}
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: "url('/cta-bg.png')" }}
         />
-        {/* Subtle darkening overlay so text stays readable */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0a1a17]/75 via-[#0a1a17]/45 to-[#0a1a17]/55" />
+        {/* Green-tinted overlay — deep green on the left for text readability, lime on the right behind QR codes */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#00594F]/85 via-[#00594F]/60 to-[#CEDC00]/25" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#E1FEE5]/10 via-transparent to-[#00594F]/20" />
 
         <div className="relative z-10">
           {/* Top section */}
-          <div className="px-8 sm:px-12 lg:px-16 pt-12 sm:pt-16 pb-10 sm:pb-12">
-            <div className="grid lg:grid-cols-5 gap-10 lg:gap-8 items-start">
+          <div className="px-7 sm:px-10 lg:px-14 pt-9 sm:pt-12 pb-8 sm:pb-10">
+            <div className="grid lg:grid-cols-5 gap-8 lg:gap-6 items-center">
               {/* Left — heading */}
               <motion.div variants={fadeInUp} className="lg:col-span-3">
-                <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.05] tracking-tight">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-white leading-snug tracking-tight">
                   Download{" "}
                   <span className="text-[#CEDC00]">FixMyCarDude</span>{" "}
                   now
                 </h2>
-                <p className="mt-5 text-white/55 text-base sm:text-lg max-w-md leading-relaxed">
+                <p className="mt-3 text-white/60 text-sm sm:text-base max-w-md leading-relaxed">
                   Scan to install the customer app, or get the shop dashboard
-                  on the web. Free for 14 days.
+                  on the web. Free for 21 days.
                 </p>
               </motion.div>
 
@@ -68,11 +137,11 @@ export default function CTA() {
           {/* Bottom yellow accent bar — desktop CTAs */}
           <motion.div
             variants={fadeInUp}
-            className="bg-[#CEDC00] px-8 sm:px-12 lg:px-16 py-6 sm:py-7"
+            className="bg-[#CEDC00] px-7 sm:px-10 lg:px-14 py-5 sm:py-6"
           >
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
-                <p className="text-[#0a1a17] text-xs font-bold tracking-[0.18em] uppercase">
+                <p className="text-[#0a1a17] text-[11px] font-bold tracking-[0.18em] uppercase">
                   Run your shop on the web
                 </p>
                 <p className="mt-1 text-[#0a1a17]/70 text-sm">
@@ -82,14 +151,14 @@ export default function CTA() {
               <div className="flex flex-wrap gap-2.5 sm:flex-nowrap">
                 <a
                   href="#contact"
-                  className="group inline-flex items-center gap-2 px-5 sm:px-6 py-3 bg-[#0a1a17] text-white font-semibold text-sm rounded-full hover:bg-[#00594F] transition-all"
+                  className="group inline-flex items-center gap-2 px-5 py-2.5 bg-[#0a1a17] text-white font-semibold text-sm rounded-full hover:bg-[#003d35] transition-all"
                 >
                   <Calendar size={15} />
                   Schedule a Demo
                 </a>
                 <a
                   href="#contact"
-                  className="group inline-flex items-center gap-2 px-5 sm:px-6 py-3 bg-white text-[#0a1a17] font-semibold text-sm rounded-full hover:bg-white/90 transition-all"
+                  className="group inline-flex items-center gap-2 px-5 py-2.5 bg-white text-[#0a1a17] font-semibold text-sm rounded-full hover:bg-white/90 transition-all"
                 >
                   Start Free Trial
                   <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
@@ -98,7 +167,8 @@ export default function CTA() {
             </div>
           </motion.div>
         </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </section>
   );
 }
@@ -115,8 +185,8 @@ function QRBlock({
   icon: React.ReactNode;
 }) {
   return (
-    <div className="flex-1 sm:flex-initial bg-white/[0.04] border border-white/10 rounded-2xl p-3 backdrop-blur-sm hover:border-white/20 transition-colors">
-      <div className="w-[120px] h-[120px] sm:w-[130px] sm:h-[130px] rounded-xl bg-white p-2 flex items-center justify-center">
+    <div className="flex-1 sm:flex-initial bg-white/[0.04] border border-white/10 rounded-2xl p-2.5 backdrop-blur-sm">
+      <div className="w-[110px] h-[110px] sm:w-[120px] sm:h-[120px] rounded-lg bg-white p-1.5 flex items-center justify-center">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={src}
@@ -124,11 +194,11 @@ function QRBlock({
           className="w-full h-full object-contain"
         />
       </div>
-      <div className="mt-3 px-1 flex items-center gap-1.5 text-white">
+      <div className="mt-2.5 px-1 flex items-center gap-1.5 text-white">
         <span className="opacity-70">{icon}</span>
         <div className="leading-tight">
-          <p className="text-[10px] text-white/50">{sub}</p>
-          <p className="text-xs font-semibold">{label}</p>
+          <p className="text-[9px] text-white/50">{sub}</p>
+          <p className="text-[11px] font-semibold">{label}</p>
         </div>
       </div>
     </div>
