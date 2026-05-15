@@ -62,7 +62,7 @@ export default function FeatureList() {
             className="mt-5 text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight"
           >
             No add-ons. No surprises.{" "}
-            <span className="gradient-text">Everything&apos;s in the box.</span>
+            <span className="gradient-text">Everything you need for one price.</span>
           </motion.h2>
           <motion.p
             variants={fadeInUp}

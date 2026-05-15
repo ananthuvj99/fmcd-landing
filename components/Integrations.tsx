@@ -70,7 +70,7 @@ export default function Integrations() {
             className="mt-5 text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight"
           >
             Works with the tools{" "}
-            <span className="gradient-text">your shop already relies on.</span>
+            <span className="gradient-text">you already use.</span>
           </motion.h2>
         </motion.div>
 

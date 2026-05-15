@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight, Calendar } from "lucide-react";
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -92,8 +92,8 @@ export default function Hero() {
                 href="#contact"
                 className="group inline-flex items-center gap-2 px-7 py-3.5 bg-white/70 backdrop-blur-sm border border-[#00594F]/10 text-[#00594F] font-semibold rounded-full hover:bg-white transition-all hover:-translate-y-0.5"
               >
-                <Play size={14} fill="currentColor" />
-                Watch Demo
+                <Calendar size={14} />
+                Schedule Demo
               </a>
             </motion.div>
 
