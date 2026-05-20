@@ -37,7 +37,11 @@ export default function Navbar() {
       className="fixed top-4 left-0 right-0 z-50 px-4"
     >
       <div className={`max-w-6xl mx-auto transition-all duration-500 ${
-        scrolled ? "navbar-pill rounded-full" : "rounded-2xl"
+        mobileOpen
+          ? "navbar-pill rounded-2xl"
+          : scrolled
+            ? "navbar-pill rounded-full"
+            : "rounded-2xl"
       }`}>
         <div className="px-4 sm:px-6 h-14 flex items-center justify-between">
           <a href="/" className="flex items-center group">
@@ -90,9 +94,9 @@ export default function Navbar() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="md:hidden overflow-hidden border-t border-[#00594F]/10"
+              className="md:hidden overflow-hidden rounded-b-2xl bg-white border-t border-[#00594F]/10 shadow-lg shadow-slate-900/5"
             >
-              <div className="px-6 py-4 flex flex-col gap-2">
+              <div className="px-6 py-4 flex flex-col gap-2 bg-white">
                 {navLinks.map((link) => (
                   <a
                     key={link.href}
