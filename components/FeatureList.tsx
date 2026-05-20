@@ -62,7 +62,28 @@ export default function FeatureList() {
             className="mt-5 text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight"
           >
             No add-ons. No surprises.{" "}
-            <span className="gradient-text">Everything you need for one price.</span>
+            <span className="gradient-text">
+              Everything you need for{" "}
+              <span className="relative inline-block gradient-text">
+                one
+                <svg
+                  aria-hidden
+                  viewBox="0 0 100 14"
+                  preserveAspectRatio="none"
+                  className="absolute left-0 -bottom-1 sm:-bottom-1.5 w-full h-2.5 sm:h-3 pointer-events-none overflow-visible"
+                  style={{ WebkitTextFillColor: "initial" }}
+                >
+                  <path
+                    d="M2 10 Q 25 2, 50 7 T 98 6"
+                    fill="none"
+                    stroke="#CEDC00"
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </span>{" "}
+              price.
+            </span>
           </motion.h2>
           <motion.p
             variants={fadeInUp}

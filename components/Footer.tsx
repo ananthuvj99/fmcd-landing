@@ -34,7 +34,7 @@ export default function Footer() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-px bg-gradient-to-r from-transparent via-[#00594F]/20 to-transparent" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-10">
+        <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-10">
           <div className="lg:col-span-2">
             <img
               src="/images/logo.svg"
@@ -72,6 +72,15 @@ export default function Footer() {
               </ul>
             </div>
           ))}
+
+          {/* SEMA member badge — far right column */}
+          <div className="flex md:justify-end items-start">
+            <img
+              src="/sema-logo.png"
+              alt="SEMA - Specialty Equipment Market Association"
+              className="h-24 sm:h-28 lg:h-32 w-auto"
+            />
+          </div>
         </div>
 
         <div className="mt-12 pt-8 border-t border-[#00594F]/8 flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -80,7 +89,9 @@ export default function Footer() {
           </p>
           <div className="flex items-center gap-3">
             <a
-              href="#"
+              href="https://www.instagram.com/fixmycardude/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-9 h-9 bg-[#00594F]/5 rounded-full flex items-center justify-center hover:bg-[#00594F] hover:text-white transition-colors text-[#00594F]"
               aria-label="Instagram"
             >

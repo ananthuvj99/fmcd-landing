@@ -1,10 +1,48 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
+import { motion, AnimatePresence } from "framer-motion";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
+
+// EmailJS credentials — the public key is safe to expose in client code.
+const EMAILJS_SERVICE_ID = "service_sc26clc";
+const EMAILJS_TEMPLATE_ID = "template_akmz15d";
+const EMAILJS_PUBLIC_KEY = "S5-BgGhYGYqudAK-n";
+
+type Status = "idle" | "sending" | "success" | "error";
 
 export default function Contact() {
+  const formRef = useRef<HTMLFormElement>(null);
+  const [status, setStatus] = useState<Status>("idle");
+  const [errorMsg, setErrorMsg] = useState<string>("");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!formRef.current || status === "sending") return;
+    setStatus("sending");
+    setErrorMsg("");
+    try {
+      await emailjs.sendForm(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        { publicKey: EMAILJS_PUBLIC_KEY }
+      );
+      setStatus("success");
+      formRef.current.reset();
+    } catch (err) {
+      console.error("EmailJS error:", err);
+      const message =
+        err instanceof Error
+          ? err.message
+          : "Something went wrong. Please try again or email us directly.";
+      setErrorMsg(message);
+      setStatus("error");
+    }
+  };
+
   return (
     <section
       id="contact"
@@ -46,21 +84,22 @@ export default function Contact() {
         >
           {/* Form */}
           <form
-            onSubmit={(e) => e.preventDefault()}
+            ref={formRef}
+            onSubmit={handleSubmit}
             className="bg-slate-50 rounded-3xl border border-slate-200/70 p-5 sm:p-6 lg:p-7"
           >
             <div className="space-y-3.5">
-              <Field id="name" label="Name" required placeholder="Your full name" />
-              <Field id="shop" label="Shop Name" required placeholder="Your shop name" />
-              <Field id="email" type="email" label="Email Address" required placeholder="you@example.com" />
+              <Field id="name" name="name" label="Name" required placeholder="Your full name" />
+              <Field id="shop" name="shop" label="Shop Name" required placeholder="Your shop name" />
+              <Field id="email" name="email" type="email" label="Email Address" required placeholder="you@example.com" />
 
               <div className="grid sm:grid-cols-2 gap-3.5">
-                <Field id="phone" type="tel" label="Phone" required placeholder="(555) 123-4567" />
-                <Field id="city" label="City" required placeholder="City" />
+                <Field id="phone" name="phone" type="tel" label="Phone" required placeholder="(555) 123-4567" />
+                <Field id="city" name="city" label="City" required placeholder="City" />
               </div>
               <div className="grid sm:grid-cols-2 gap-3.5">
-                <Field id="state" label="State" required placeholder="State" />
-                <Field id="zipcode" label="Zipcode" required placeholder="Zipcode" />
+                <Field id="state" name="state" label="State" required placeholder="State" />
+                <Field id="zipcode" name="zipcode" label="Zipcode" required placeholder="Zipcode" />
               </div>
 
               <div>
@@ -69,27 +108,69 @@ export default function Contact() {
                 </label>
                 <textarea
                   id="message"
+                  name="message"
                   rows={3}
+                  required
                   placeholder="Tell us a bit about what you're looking for..."
                   className="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#00594F]/20 focus:border-[#00594F] transition-all resize-none"
                 />
               </div>
             </div>
 
-            <div className="mt-5 flex items-center gap-3">
+            {/* Submit + status row */}
+            <div className="mt-5 flex flex-wrap items-center gap-3">
               <button
                 type="submit"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 text-white font-semibold text-sm rounded-full hover:bg-[#00594F] transition-all hover:shadow-lg hover:shadow-[#00594F]/20"
+                disabled={status === "sending"}
+                className="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 text-white font-semibold text-sm rounded-full hover:bg-[#00594F] transition-all hover:shadow-lg hover:shadow-[#00594F]/20 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:bg-slate-900"
               >
-                Get In Touch
+                {status === "sending" ? (
+                  <>
+                    <Loader2 size={15} className="animate-spin" />
+                    Sending…
+                  </>
+                ) : (
+                  "Get In Touch"
+                )}
               </button>
               <button
                 type="submit"
+                disabled={status === "sending"}
                 aria-label="Submit"
-                className="inline-flex items-center justify-center w-11 h-11 border border-slate-300 text-slate-700 rounded-full hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all"
+                className="inline-flex items-center justify-center w-11 h-11 border border-slate-300 text-slate-700 rounded-full hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 <ArrowUpRight size={17} />
               </button>
+
+              {/* Feedback */}
+              <AnimatePresence mode="wait">
+                {status === "success" && (
+                  <motion.div
+                    key="success"
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.25 }}
+                    className="inline-flex items-center gap-2 text-sm font-medium text-[#00594F]"
+                  >
+                    <CheckCircle2 size={16} />
+                    Message sent — we&apos;ll be in touch soon.
+                  </motion.div>
+                )}
+                {status === "error" && (
+                  <motion.div
+                    key="error"
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.25 }}
+                    className="inline-flex items-center gap-2 text-sm font-medium text-red-600"
+                  >
+                    <AlertCircle size={16} />
+                    {errorMsg || "Something went wrong. Please try again."}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </form>
 
@@ -119,12 +200,14 @@ export default function Contact() {
 
 function Field({
   id,
+  name,
   label,
   type = "text",
   placeholder,
   required = false,
 }: {
   id: string;
+  name?: string;
   label: string;
   type?: string;
   placeholder?: string;
@@ -138,6 +221,7 @@ function Field({
       </label>
       <input
         id={id}
+        name={name ?? id}
         type={type}
         placeholder={placeholder}
         required={required}

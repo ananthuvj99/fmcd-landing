@@ -25,13 +25,15 @@ function clamp01(v: number, start: number, end: number) {
   return (v - start) / (end - start);
 }
 
+// Positions are % of viewport. Avoid the centered heading band
+// (roughly x:18-82, y:30-65) and stay below the floating navbar (y >= 14).
 const stickyNotes = [
-  { text: "Call back Mrs. Johnson\nabout brake job", color: "#FEF08A", rotate: -4, x: 5, y: 8 },
-  { text: "Order pads for\n2019 Camry", color: "#FCA5A5", rotate: 5, x: 60, y: 5 },
-  { text: "Bay 2 lift inspection\noverdue!!", color: "#93C5FD", rotate: -2, x: 80, y: 55 },
-  { text: "Mike called in sick\nreschedule 3 jobs", color: "#FDBA74", rotate: 6, x: 2, y: 60 },
-  { text: "Invoice #4821\nstill unpaid", color: "#FEF08A", rotate: -5, x: 38, y: 70 },
-  { text: "Alignment machine\nneeds calibration", color: "#D8B4FE", rotate: 3, x: 73, y: 28 },
+  { text: "Call back Mrs.\nJohnson about\nbrake job", color: "#FEF08A", rotate: -4, x: 8, y: 16 },
+  { text: "Order pads for\n2019 Camry", color: "#FCA5A5", rotate: 5, x: 77, y: 14 },
+  { text: "Mike called in sick\nreschedule 3 jobs", color: "#FDBA74", rotate: 6, x: 2, y: 42 },
+  { text: "Alignment machine\nneeds calibration", color: "#D8B4FE", rotate: 3, x: 83, y: 40 },
+  { text: "Bay 2 lift\ninspection\noverdue!!", color: "#93C5FD", rotate: -2, x: 10, y: 70 },
+  { text: "Invoice #4821\nstill unpaid", color: "#FEF08A", rotate: -5, x: 77, y: 72 },
 ];
 
 function StickyNote({
@@ -88,7 +90,7 @@ function StickyNote({
         transition={{ delay: 0.15 + index * 0.07, type: "spring", stiffness: 180, damping: 18 }}
       >
         <motion.div
-          className="w-[150px] h-[150px] sm:w-[170px] sm:h-[170px] lg:w-[190px] lg:h-[190px]"
+          className="w-[145px] h-[145px] sm:w-[160px] sm:h-[160px] lg:w-[175px] lg:h-[175px]"
           animate={{
             y: finalY,
             rotate: finalRotate,
@@ -105,7 +107,7 @@ function StickyNote({
           }}
         >
           <div
-            className="relative w-full h-full p-4 sm:p-5 text-[12px] sm:text-[13px] lg:text-sm font-semibold leading-snug text-slate-800 whitespace-pre-line"
+            className="relative w-full h-full px-3 py-4 sm:px-4 sm:py-5 flex items-center justify-center text-center text-[12px] sm:text-[13px] lg:text-[14px] font-semibold leading-snug text-slate-800 whitespace-pre-line"
             style={{
               background: `linear-gradient(135deg, ${note.color} 0%, ${note.color} 60%, ${shade(note.color, -8)} 100%)`,
               clipPath: "polygon(0 0, 100% 0, 100% 82%, 82% 100%, 0 100%)",
