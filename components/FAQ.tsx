@@ -119,15 +119,15 @@ export default function FAQ() {
           </motion.h2>
         </motion.div>
 
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          className="border-t border-slate-200/80"
-        >
+        <div className="border-t border-slate-200/80">
           {visible.map((faq, i) => (
-            <motion.div key={faq.question} variants={fadeInUp}>
+            <motion.div
+              key={faq.question}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.35, delay: i * 0.04, ease: "easeOut" }}
+            >
               <FAQItem
                 faq={faq}
                 isOpen={openIndex === i}
@@ -135,7 +135,7 @@ export default function FAQ() {
               />
             </motion.div>
           ))}
-        </motion.div>
+        </div>
 
         {faqs.length > INITIAL_COUNT && (
           <div className="mt-8 text-center">

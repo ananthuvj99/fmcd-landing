@@ -11,6 +11,7 @@ export default function Hero() {
     target: containerRef,
     offset: ["start start", "end start"],
   });
+  const { scrollY } = useScroll();
 
   const dashboardScale = useTransform(scrollYProgress, [0, 0.5], [0.8, 1]);
   const dashboardY = useTransform(scrollYProgress, [0, 0.5], [60, -320]);
@@ -31,6 +32,8 @@ export default function Hero() {
     if (v >= FADE_END) return -60;
     return -((v - FADE_START) / (FADE_END - FADE_START)) * 60;
   });
+
+  const scrollCueOpacity = useTransform(scrollY, [0, 80], [1, 0]);
 
   return (
     <section
@@ -171,11 +174,8 @@ export default function Hero() {
 
         {/* Scroll cue */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
-          style={{ opacity: headingOpacity }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
+          style={{ opacity: scrollCueOpacity }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 pointer-events-none"
         >
           <div className="flex flex-col items-center gap-2">
             <span className="text-[10px] font-medium text-slate-500 uppercase tracking-wider">Scroll to explore</span>

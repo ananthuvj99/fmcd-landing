@@ -39,7 +39,7 @@ export default function Audience() {
     // Full viewport height — content vertically centered. Cards animate in
     // from the right on view-enter. No sticky pin (which was leaving empty
     // pale-green space below after the cards finished animating).
-    <section className="relative min-h-screen py-16 sm:py-20 overflow-hidden bg-gradient-to-b from-[#E1FEE5]/40 via-[#FAFFDC]/30 to-[#E1FEE5]/40 flex items-center">
+    <section id="about" className="relative min-h-screen py-16 sm:py-20 overflow-hidden bg-gradient-to-b from-[#E1FEE5]/40 via-[#FAFFDC]/30 to-[#E1FEE5]/40 flex items-center">
       <div className="relative w-full">
         {/* Animated background blobs */}
         <motion.div

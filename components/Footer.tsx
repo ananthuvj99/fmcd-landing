@@ -7,15 +7,14 @@ const footerLinks = [
       { label: "Features", href: "#features" },
       { label: "Mobile App", href: "#mobile-app" },
       { label: "Integrations", href: "#integrations" },
-      { label: "Pricing", href: "#" },
+      { label: "Pricing", href: "#pricing" },
     ],
   },
   {
     title: "Company",
     links: [
-      { label: "About", href: "#" },
+      { label: "About", href: "#about" },
       { label: "Contact", href: "#contact" },
-      { label: "Careers", href: "#" },
     ],
   },
   {

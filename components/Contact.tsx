@@ -1,15 +1,9 @@
 "use client";
 
 import { useRef, useState } from "react";
-import emailjs from "@emailjs/browser";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
-import { ArrowUpRight, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
-
-// EmailJS credentials — the public key is safe to expose in client code.
-const EMAILJS_SERVICE_ID = "service_sc26clc";
-const EMAILJS_TEMPLATE_ID = "template_akmz15d";
-const EMAILJS_PUBLIC_KEY = "S5-BgGhYGYqudAK-n";
+import { CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
 
 type Status = "idle" | "sending" | "success" | "error";
 
@@ -24,16 +18,24 @@ export default function Contact() {
     setStatus("sending");
     setErrorMsg("");
     try {
-      await emailjs.sendForm(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        formRef.current,
-        { publicKey: EMAILJS_PUBLIC_KEY }
+      const payload = Object.fromEntries(
+        new FormData(formRef.current).entries()
       );
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) {
+        const data = (await res.json().catch(() => null)) as
+          | { error?: string }
+          | null;
+        throw new Error(data?.error ?? "Failed to send message.");
+      }
       setStatus("success");
       formRef.current.reset();
     } catch (err) {
-      console.error("EmailJS error:", err);
+      console.error("Contact form error:", err);
       const message =
         err instanceof Error
           ? err.message
@@ -88,6 +90,14 @@ export default function Contact() {
             onSubmit={handleSubmit}
             className="bg-slate-50 rounded-3xl border border-slate-200/70 p-5 sm:p-6 lg:p-7"
           >
+            <input
+              type="text"
+              name="website"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              className="absolute left-[-9999px] w-px h-px opacity-0"
+            />
             <div className="space-y-3.5">
               <Field id="name" name="name" label="Name" required placeholder="Your full name" />
               <Field id="shop" name="shop" label="Shop Name" required placeholder="Your shop name" />
@@ -133,15 +143,6 @@ export default function Contact() {
                   "Get In Touch"
                 )}
               </button>
-              <button
-                type="submit"
-                disabled={status === "sending"}
-                aria-label="Submit"
-                className="inline-flex items-center justify-center w-11 h-11 border border-slate-300 text-slate-700 rounded-full hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
-              >
-                <ArrowUpRight size={17} />
-              </button>
-
               {/* Feedback */}
               <AnimatePresence mode="wait">
                 {status === "success" && (
